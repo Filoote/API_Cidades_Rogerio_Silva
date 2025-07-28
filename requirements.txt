@@ -5,3 +5,4 @@ drf-yasg
 django-cors-headers
 django-filter
 Pillow
+gunicorn
