@@ -1,1 +1,1 @@
-web: gunicorn Cidades.wsgi:application
+web: gunicorn CidadesAPI.wsgi:application
