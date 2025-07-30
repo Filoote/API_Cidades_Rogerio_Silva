@@ -6,9 +6,9 @@ import dj_database_url
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Segurança
-SECRET_KEY = os.environ.get('SECRET_KEY', '89OowKekNkaBO31u4hkZr4wqTtXnbSnC1jTj0We4KF5OMuID-TD51dP2Oomif4EC1Dw') # Substitua em produção
-DEBUG = os.environ.get('DEBUG', 'False') == 'True'
-ALLOWED_HOSTS = ('https://api-cidades-rogerio-silva.onrender.com')
+SECRET_KEY = '89OowKekNkaBO31u4hkZr4wqTtXnbSnC1jTj0We4KF5OMuID-TD51dP2Oomif4EC1Dw'  # Substitua em produção
+DEBUG = False
+ALLOWED_HOSTS = ['https://api-cidades-rogerio-silva.onrender.com']
 
 # Aplicações instaladas
 INSTALLED_APPS = [
@@ -82,8 +82,7 @@ USE_TZ = True
 
 # Arquivos estáticos
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",
