@@ -1,13 +1,14 @@
 from pathlib import Path
 import os
+import dj_database_url
 
 # Caminho base do projeto
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Segurança
-SECRET_KEY = '89OowKekNkaBO31u4hkZr4wqTtXnbSnC1jTj0We4KF5OMuID-TD51dP2Oomif4EC1Dw'  # Substitua em produção
-DEBUG = False
-ALLOWED_HOSTS = ['https://api-cidades-rogerio-silva.onrender.com']
+SECRET_KEY = os.environ.get('SECRET_KEY', '89OowKekNkaBO31u4hkZr4wqTtXnbSnC1jTj0We4KF5OMuID-TD51dP2Oomif4EC1Dw') # Substitua em produção
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'https://api-cidades-rogerio-silva.onrender.com').split(',')
 
 # Aplicações instaladas
 INSTALLED_APPS = [
@@ -66,14 +67,7 @@ WSGI_APPLICATION = 'Cidades.wsgi.application'
 
 # Banco de dados padrão (SQLite)
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME'),
-        'USER': os.environ.get('DB_USER'),
-        'PASSWORD': os.environ.get('DB_PASSWORD'),
-        'HOST': os.environ.get('DB_HOST'),
-        'PORT': os.environ.get('DB_PORT'),
-    }
+    'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
 }
 
 # Validação de senha (desabilitado neste projeto)
@@ -88,7 +82,8 @@ USE_TZ = True
 
 # Arquivos estáticos
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",

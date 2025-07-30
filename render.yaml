@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: cidades-api
+    env: python
+    buildCommand: |
+      pip install -r requirements.txt
+      python manage.py migrate
+      python manage.py collectstatic --noinput
+    startCommand: gunicorn Cidades.wsgi --bind 0.0.0.0:$PORT
+    envVars:
+      - key: SECRET_KEY
+        sync: false
+      - key: DEBUG
+        value: "False"
+      - key: ALLOWED_HOSTS
+        value: cidades-api.onrender.com
+      - key: DJANGO_SETTINGS_MODULE
+        value: Cidades.settings

@@ -1,1 +1,1 @@
-web: gunicorn CidadesAPI.wsgi:application
+web: gunicorn Cidades.wsgi --bind 0.0.0.0:$PORT
